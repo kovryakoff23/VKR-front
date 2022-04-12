@@ -1,0 +1,57 @@
+<h1>Производимые работы</h1>
+<input type="button" value="Добавить" class="btn btn-info"
+       (click)="addProduction()">
+<hr>
+<mat-tab-group>
+  <mat-tab  label = "Активные">
+<div class="productionClass">
+<div *ngFor="let unitProduction of unitProductions">
+  <div *ngIf="!unitProduction.status">
+  <h3>{{unitProduction.nameWork}}</h3>
+  <div>Дата начала: {{unitProduction.dateStartWork| date: 'dd/MM/yy' }}</div>
+  <div>Дата завершения: {{unitProduction.dateEndWork| date: 'dd/MM/yy' }}</div>
+  <div>Описание: {{unitProduction.description}}</div>
+  <div *ngIf=!unitProduction.status><td> Активна </td></div>
+  <div *ngIf=unitProduction.status><td>Не Активна </td></div>
+  <div class="row justify-content-end">
+    <div class="col-2">
+      <input type="button" value="Подробнее" (click)="openDetails(unitProduction)" class="btn btn-info">
+    </div>
+    <div class="col-2">
+      <button type="button" value="Изменить статус" (click)="updateStatus(unitProduction)" class="btn btn-success"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+      </svg></button>
+    </div>
+  </div>
+  <hr>
+  </div>
+</div>
+</div>
+  </mat-tab>
+    <mat-tab  label = "Выполненные" >
+      <div class="productionClass">
+        <div *ngFor="let unitProduction of unitProductions">
+          <div *ngIf="unitProduction.status">
+            <h3>{{unitProduction.nameWork}}</h3>
+            <div>Дата начала: {{unitProduction.dateStartWork| date: 'dd/MM/yy' }}</div>
+            <div>Дата завершения: {{unitProduction.dateEndWork| date: 'dd/MM/yy' }}</div>
+            <div>Описание: {{unitProduction.description}}</div>
+            <div *ngIf=!unitProduction.status><td> Активна </td></div>
+            <div *ngIf=unitProduction.status><td>Не Активна </td></div>
+            <div class="row justify-content-end">
+              <div class="col-2">
+                <input type="button" value="Подробнее" (click)="openDetails(unitProduction)" class="btn btn-info">
+              </div>
+              <div class="col-2">
+                <button type="button" value="Изменить статус" (click)="updateStatus(unitProduction)" class="btn btn-dark"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-counterclockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M12.83 6.706a5 5 0 0 0-7.103-3.16.5.5 0 1 1-.454-.892A6 6 0 1 1 2.545 5.5a.5.5 0 1 1 .91.417 5 5 0 1 0 9.375.789z"/>
+                  <path fill-rule="evenodd" d="M7.854.146a.5.5 0 0 0-.708 0l-2.5 2.5a.5.5 0 0 0 0 .708l2.5 2.5a.5.5 0 1 0 .708-.708L5.707 3 7.854.854a.5.5 0 0 0 0-.708z"/>
+                </svg></button>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+</mat-tab-group >

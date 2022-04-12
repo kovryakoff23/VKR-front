@@ -1,0 +1,75 @@
+<div class="container">
+  <h1>Выполненные работы</h1>
+  <div class="btn-group">
+    <button type="submit" (click)="backClicked()" class="btn btn-secondary">Отмена</button>
+    <input type="button" value="Добавить" class="btn btn-default" (click)="addSalary()">
+  </div>
+  <div class="productionClass">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <td>Наименование объекта</td>
+        <td>Наименование позиции</td>
+        <td>Дата</td>
+        <td>Сумма</td>
+        <td></td>
+        <td></td>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let salaryWorker of this.salaryWorkers">
+      <tr *ngIf="!salaryWorker.statusExecution">
+        <ng-template [ngTemplateOutlet]="loadTemplate(salaryWorker)"
+                     [ngTemplateOutletContext]="{ $implicit: salaryWorker}">
+        </ng-template>
+      </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <div>{{statusMessage}}</div>
+
+  <!--шаблон для чтения-->
+  <ng-template #readOnlyTemplate let-salaryWorker>
+    <td>{{salaryWorker.unitName}}</td>
+    <td>{{salaryWorker.namePosition}}</td>
+    <td>{{salaryWorker.dateSalary | date: 'dd/MM/yy'}}</td>
+    <td>{{salaryWorker.sumSalary}}</td>
+    <td>
+      <input type="button" value="Изменить" class="btn btn-default" (click)="editSalary(salaryWorker)">
+    </td>
+    <td>
+      <input type="button" value="Удалить" (click)="deleteSalary(salaryWorker)" class="btn btn-danger">
+    </td>
+    <td>
+    <button type="button" value="Изменить статус" (click)="updateStatus(salaryWorker)" class="btn btn-success"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+    </svg></button>
+    </td>
+  </ng-template>
+
+  <!--readonly disabled-->
+
+  <!--шаблон для редактирования-->
+  <ng-template #editTemplate>
+    <td>
+      <input type="text" [(ngModel)]="this.editedSalaryWorker.unitName" class="form-control" >
+    </td>
+    <td>
+      <input type="text" [(ngModel)]="this.editedSalaryWorker.namePosition" class="form-control" >
+    </td>
+    <td>
+      <input type="date" [(ngModel)]="this.editedSalaryWorker.dateSalary" min="0" class="form-control" >
+    </td>
+    <td>
+      <input type="number" [(ngModel)]="this.editedSalaryWorker.sumSalary" min="0" class="form-control" >
+    </td>
+    <td>
+      <input type="button" value="Сохранить" (click)="saveSalary()" class="btn btn-success">
+    </td>
+    <td>
+      <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning">
+    </td>
+  </ng-template>
+
+</div>

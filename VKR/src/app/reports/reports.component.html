@@ -1,0 +1,58 @@
+<h1>Отчетность</h1>
+<mat-tab-group style="overflow-x: hidden; overflow-y: hidden">
+  <mat-tab label = "Расходы">
+    <div  class = "example-large-box mat-elevation-z5">
+      <ngx-charts-advanced-pie-chart
+        [label]="'Итого'"
+        [results]="saleData"
+        [gradient]="true" >
+      </ngx-charts-advanced-pie-chart>
+    </div>
+  </mat-tab>
+  <mat-tab  label = "Уровень готовности" style="overflow-x: hidden; overflow-y: hidden">
+      <div class="border example-small-box">
+        <h3>По объему выполненных работ:</h3>
+        <div class="container p-5">
+          <div id="worker" class="progress" [attr.data-percentage]="(reports.quantitySuccessfulWork/reports.quantityWork)*100| number:'1.0-0'">
+            <span class="progress-left">
+              <span class="progress-bar"></span>
+            </span>
+            <span class="progress-right">
+              <span class="progress-bar"></span>
+            </span>
+            <div class="progress-value">
+              <div>
+                {{(reports.quantitySuccessfulWork/reports.quantityWork)*100| number:'1.0-0'}}%<br>
+                <span>Выполнено</span>
+              </div>
+            </div>
+          </div>
+        </div>
+          <h4>Объем выполненных работ: {{reports.quantitySuccessfulWork}}</h4>
+          <h4>Общий объем работ: {{reports.quantityWork}}</h4>
+      </div>
+      <div class="border example-small-box">
+        <h3>По колличеству доставленных позиций:</h3>
+        <div class="container p-5">
+          <div class="progress" [attr.data-percentage]="(reports.quantitySuccessfulSupplierPositions/reports.quantitySupplierPositions)*100| number:'1.0-0'">
+            <span class="progress-left">
+              <span class="progress-bar"></span>
+            </span>
+            <span class="progress-right">
+              <span class="progress-bar"></span>
+            </span>
+            <div class="progress-value">
+              <div>
+                {{(reports.quantitySuccessfulSupplierPositions/reports.quantitySupplierPositions)*100| number:'1.0-0'}}%<br>
+                <span>Выполнено</span>
+              </div>
+            </div>
+          </div>
+        </div>
+          <h4>Колличество доставленных позиций: {{reports.quantitySuccessfulSupplierPositions}}</h4>
+          <h4>Общее колличество: {{reports.quantitySupplierPositions}}</h4>
+      </div>
+  </mat-tab>
+</mat-tab-group>
+
+

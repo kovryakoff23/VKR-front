@@ -1,0 +1,76 @@
+<div class="container" style="height: 100vh">
+  <h1>Выполненные поставки</h1>
+  <div class="btn-group">
+    <button type="submit" (click)="backClicked()" class="btn btn-secondary">Отмена</button>
+    <input type="button" value="Добавить" class="btn btn-default" (click)="addPaymentSuppliers()">
+  </div>
+  <div class="productionClass">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <td>Наименование позиции</td>
+        <td>Наименование объекта</td>
+        <td>Дата</td>
+        <td>Сумма</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let paymentSupplier of this.paymentSuppliers">
+      <tr *ngIf="paymentSupplier.status">
+        <ng-template [ngTemplateOutlet]="loadTemplate(paymentSupplier)"
+                     [ngTemplateOutletContext]="{ $implicit: paymentSupplier}">
+        </ng-template>
+      </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <div>{{statusMessage}}</div>
+
+  <!--шаблон для чтения-->
+  <ng-template #readOnlyTemplate let-paymentSupplier>
+    <td>{{paymentSupplier.unitName}}</td>
+    <td>{{paymentSupplier.namePosition}}</td>
+    <td>{{paymentSupplier.datePay | date: 'dd/MM/yy'}}</td>
+    <td>{{paymentSupplier.sumPay}}</td>
+    <td>
+      <input type="button" value="Изменить" class="btn btn-default" (click)="editPaymentSuppliers(paymentSupplier)">
+    </td>
+    <td>
+      <input type="button" value="Удалить" (click)="deletePaymentSuppliers(paymentSupplier)" class="btn btn-danger">
+    </td>
+    <td>
+      <button type="button" value="Изменить статус" (click)="updateStatus(paymentSupplier)" class="btn btn-success"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+      </svg></button>
+    </td>
+  </ng-template>
+
+  <!--readonly disabled-->
+
+  <!--шаблон для редактирования-->
+  <ng-template #editTemplate>
+    <td>
+      <input type="text" [(ngModel)]="this.editedPaymentSuppliers.unitName" class="form-control" >
+    </td>
+    <td>
+      <input type="text" [(ngModel)]="this.editedPaymentSuppliers.namePosition" class="form-control" >
+    </td>
+    <td>
+      <input type="date" [(ngModel)]="this.editedPaymentSuppliers.datePay" min="0" class="form-control" >
+    </td>
+    <td>
+      <input type="number" [(ngModel)]="this.editedPaymentSuppliers.sumPay" min="0" class="form-control" >
+    </td>
+    <td>
+      <input type="button" value="Сохранить" (click)="savePaymentSuppliers()" class="btn btn-success">
+    </td>
+    <td>
+      <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning">
+    </td>
+  </ng-template>
+
+</div>

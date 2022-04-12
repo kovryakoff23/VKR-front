@@ -1,0 +1,40 @@
+<div class="container" [hidden]="this.hidden">
+  <div class="card rounded-pill">
+    <div class="card-body">
+    <input type="search" class="form-control ds-input container mx-auto" id="search-input" placeholder="Поиск"
+           (input)="getSearch()" [(ngModel)]="this.search">
+  </div>
+  </div>
+  <div class="productionClass container-fluid m-3">
+    <div *ngFor="let unit of units">
+      <div *ngIf="!unit.type">
+        <div class="row">
+          <div class="col">
+            <h6>Название</h6>
+            <p>{{ unit.name}}</p>
+            <h6>Дата начала</h6>
+            <p>{{ unit.dateStart | date: 'dd/MM/yy'}}</p>
+            <h6>Дата завершения</h6>
+            <p>{{ unit.dateFinish| date: 'dd/MM/yy'}}</p>
+            <h6>Адрес</h6>
+            <p>{{ unit.address}}</p>
+          </div>
+          <div class="col">
+            <h6>Наименование организации заказчика</h6>
+            <p>{{ unit.nameOrganizationCustomer}}</p>
+            <h6>Ответсвенное лицо</h6>
+            <p>{{ unit.responsibleForWork}}</p>
+            <h6>Контактный телефон</h6>
+            <p>{{ unit.contactPhoneNumber}}</p>
+          </div>
+        </div>
+        <input type="button" (click)="updateId(unit.id)" class="nav-link text-dark border border-1 rounded-pill"
+                style="text-align: center;" value="Подробнее">
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+<router-outlet></router-outlet>
+</div>

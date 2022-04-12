@@ -1,0 +1,60 @@
+<h1>Информация</h1>
+<hr>
+<div class="infoClass">
+  <h5>Название</h5>
+  <p>{{ unit.name}}</p>
+  <h5>Дата начала</h5>
+  <p>{{ unit.dateStart | date: 'dd/MM/yy'}}</p>
+  <h5>Дата завершения</h5>
+  <p>{{ unit.dateFinish| date: 'dd/MM/yy'}}</p>
+  <h5>Адрес</h5>
+  <p>{{ unit.address}}</p>
+  <hr>
+  <h5>Наименование организации заказчика</h5>
+  <p>{{ unit.nameOrganizationCustomer}}</p>
+  <h5>Ответсвенное лицо</h5>
+  <p>{{ unit.responsibleForWork}}</p>
+  <h5>Контактный телефон</h5>
+  <p>{{ unit.contactPhoneNumber}}</p>
+  <hr>
+  <h5>Документация</h5>
+  <!--  <div *ngFor="let file of unitDocumentation.files">{{file.name}}</div>-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-8">
+        <label class="btn btn-default p-0">
+          <input type="file" (change)="selectFile($event)"/>
+        </label>
+      </div>
+      <div class="col-4">
+        <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+          Загрузить
+        </button>
+      </div>
+    </div>
+    <div *ngIf="currentFile" class="progress my-3">
+      <div
+        class="progress-bar progress-bar-info progress-bar-striped"
+        role="progressbar"
+        attr.aria-valuenow="{{ progress }}"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [ngStyle]="{ width: progress + '%' }"
+      >
+        {{ progress }}%
+      </div>
+    </div>
+    <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
+    <div class="card mt-3">
+      <div class="card-header">Список документов</div>
+      <ul
+        class="list-group list-group-flush"
+        *ngFor="let file of fileInfos | async"
+      >
+        <li class="list-group-item">
+          <a href="{{ file.url }}">{{ file.name }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

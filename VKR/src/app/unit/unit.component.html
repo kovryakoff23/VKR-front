@@ -1,0 +1,39 @@
+<main class="vh-100">
+  <div class="container-fluid h-100 bg-light" style="padding-left: 0">
+    <div class="row h-100">
+      <div class="col-sm-2 d-flex flex-column text-dark anyClass  h-100 "style="padding-left: 5vh">
+          <hr>
+          <div class="card rounded-pill">
+            <input type="search" class="form-control ds-input " id="search-input" placeholder="Поиск"
+            (input)="getSearch()" [(ngModel)]="this.search">
+          </div>
+          <hr>
+          <button routerLink="/home/units/add-unit" class="nav-link text-dark border border-1 rounded-pill"  style="text-align: center;">
+            Создать новый
+          </button>
+          <hr>
+          <div *ngFor="let unit of units">
+            <div *ngIf="unit.type">
+<!--             <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll scrollable text-center" style="max-height: 100px;">-->
+<!--                  <li class="nav-item text-center">-->
+                            <button type="button"
+                                    class="btn btn-outline-info text-dark text-center fs-3" data-bs-toggle="button" autocomplete="off"
+                                    routerLink="/home/units/unit-navigate" routerLinkActive="active-link" (click)="updateId(unit.id)" style="width: 100%;">
+<!--                              <svg class="bi me-2" height="40" ><use xlink:href="#home"></use></svg>-->
+                              {{unit.name}}
+                            </button>
+<!--                  </li>-->
+<!--            </ul>-->
+            <hr>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm px-0">
+          <div class="container-fluid height:100vh">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+    </div>
+  </div>
+</main>
+

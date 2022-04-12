@@ -1,0 +1,41 @@
+<div class="container-fluid px-0 height:100vh">
+<header class="navbar navbar-expand navbar-dark flex-column sidebar flex-md-row bd-navbar bg-dark">
+          <div class="navbar-nav-scroll">
+            <ul class="navbar-nav bd-navbar-nav flex-row">
+              <li class="nav-item">
+                <a class="nav-link " routerLink="/home/units" title="Главная">Главная</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/home/worker" title="Рабочие">Рабочие</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/home/suppliers" title="Поставщики">Поставщики</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/home/archive" title="Архив">Архив</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " routerLink="/home/notification" title="Уведомления">Уведомления</a>
+              </li>
+            </ul>
+          </div>
+        <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+
+        <li class="nav-item">
+          <a class="nav-link " routerLink="/home/units" title="Выход">Выход</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home/information" title="Информация">Информация</a>
+        </li>
+  </ul>
+</header>
+  <body>
+  <div class="container-fluid px-0 height:100vh">
+    <router-outlet></router-outlet>
+  </div>
+  </body>
+<footer class="page-footer font-small blue bg-secondary">
+  <div class="footer-copyright text-center py-3">© 2022 Copyright:
+  </div>
+</footer>
+</div>

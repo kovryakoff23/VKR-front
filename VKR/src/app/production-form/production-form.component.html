@@ -1,0 +1,60 @@
+<div class="formClass">
+  <div class="card my-5">
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #unitProductionForm="ngForm">
+
+        <div class="form-group">
+          <label for="nameWork">Название</label>
+          <input type="text" [(ngModel)]="unitProduction.nameWork"
+                 class="form-control"
+                 id="nameWork"
+                 name="nameWork"
+                 placeholder="Название"
+                 required #nameWork="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="dateStartWork">Дата начала</label>
+          <input type="date" [(ngModel)]="unitProduction.dateStartWork"
+                 class="form-control"
+                 id="dateStartWork"
+                 name="dateStartWork"
+                 placeholder="Дата начала"
+                 required #dateStartWork="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="dateEndWork">Дата окончания</label>
+          <input type="date" [(ngModel)]="unitProduction.dateEndWork"
+                 class="form-control"
+                 value="{{unitProduction.dateStartWork}}"
+                 id="dateEndWork"
+                 name="dateEndWork"
+                 placeholder="Дата окончания"
+                 required #dateEndWork="ngModel"
+                 min='{{unitProduction.dateStartWork}}'>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Описание</label>
+          <input type="text" [(ngModel)]="unitProduction.description"
+                 class="form-control"
+                 id="description"
+                 name="description"
+                 placeholder="Название">
+        </div>
+
+        <div class="form-group">
+          <input type="hidden" [(ngModel)]="unitProduction.status" value=true name="status">
+        </div>
+
+        <div class="btn-group">
+          <button type="submit" [disabled]="!unitProductionForm.form.valid"
+                  class="btn btn-success">Сохранить</button>
+          <button type="submit" (click)="backClicked()" class="btn btn-secondary">Отмена</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,17 @@
+<h1>Список рабочих</h1>
+<hr>
+<div class="productionClass">
+  <div *ngFor="let worker of workers">
+    <h3>{{worker.name}}</h3>
+    <div>Номер телефона: {{worker.phoneNumber}}</div>
+<!--    <div class="row justify-content-end">-->
+<!--      <div class="col-2">-->
+<!--        <input type="button" value="Подробнее" (click)="openDetails(unitProduction)" class="btn btn-info" />-->
+<!--      </div>-->
+<!--      <div class="col-2">-->
+<!--        <input type="button" value="Изменить статус" (click)="updateStatus(unitProduction)" class="btn btn-danger" />-->
+<!--      </div>-->
+<!--    </div>-->
+    <hr>
+  </div>
+</div>

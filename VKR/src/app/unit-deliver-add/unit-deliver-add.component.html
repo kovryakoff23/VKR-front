@@ -1,0 +1,46 @@
+<div class="formClass">
+  <div class="card my-5">
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #unitForm="ngForm">
+        <div class="form-group">
+          <label for="Name">Название</label>
+          <input type="text" [(ngModel)]="unitDeliver.name"
+                 class="form-control"
+                 id="Name"
+                 name="Name"
+                 placeholder="Название"
+                 required #Name="ngModel">
+        </div>
+        <div class="form-group">
+          <label for="dateComplete">Дата ожидаемого исполнения</label>
+          <input type="date" [(ngModel)]="unitDeliver.dateComplete"
+                 class="form-control"
+                 id="dateComplete"
+                 name="dateComplete"
+                 value="{{dateCurrent}}"
+                 placeholder="Дата ожидаемого исполнения"
+                 required #dateComplete="ngModel"
+                 min="{{dateCurrent}}">
+        </div>
+
+        <div class="form-group">
+          <label for="description">Описание</label>
+          <input type="text" [(ngModel)]="unitDeliver.description"
+                 class="form-control"
+                 id="description"
+                 name="description"
+                 placeholder="Описание">
+        </div>
+
+        <div class="form-group">
+          <input type="hidden" [(ngModel)]="unitDeliver.status" value=true>
+        </div>
+        <div class="btn-group">
+        <button type="submit" [disabled]="!unitForm.form.valid"
+                class="btn btn-success">Сохранить</button>
+        <button type="submit" (click)="backClicked()" class="btn btn-secondary">Отмена</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

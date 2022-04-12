@@ -1,0 +1,82 @@
+<div class="formClass">
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #unitForm="ngForm">
+      <div class="form-group">
+        <label for="Name">Название</label>
+        <input type="text" [(ngModel)]="unit.name"
+               class="form-control"
+               id="Name"
+               name="Name"
+               placeholder="Название"
+               required #Name="ngModel">
+      </div>
+      <div [hidden]="!Name .pristine" class="alert alert-danger">Введите название</div>
+      <div class="form-group">
+        <label for="dateStart">Дата начала</label>
+        <input type="date" [(ngModel)]="unit.dateStart"
+               class="form-control"
+               id="dateStart"
+               name="dateStart"
+               placeholder="Дата начала"
+               required #dateStart="ngModel">
+      </div>
+      <div [hidden]="!dateStart .pristine" class="alert alert-danger">Введите дату начала</div>
+      <div class="form-group">
+        <label for="dateFinish">Дата окончания</label>
+        <input type="date" [(ngModel)]="unit.dateFinish"
+               class="form-control"
+               id="dateFinish"
+               name="dateFinish"
+               placeholder="Дата окончания"
+               required #dateFinish="ngModel">
+      </div>
+        <div [hidden]="!dateFinish.pristine" class="alert alert-danger">Введите дату окончания</div>
+      <div class="form-group">
+        <label for="address">Адрес</label>
+        <input type="text" [(ngModel)]="unit.address"
+               class="form-control"
+               id="address"
+               name="address"
+               placeholder="Адрес"
+               required #address="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="nameOrganizationCustomer">Наименование организации заказчика</label>
+        <input type="text" [(ngModel)]="unit.nameOrganizationCustomer"
+               class="form-control"
+               id="nameOrganizationCustomer"
+               name="nameOrganizationCustomernameOrganizationCustomer"
+               placeholder="Наименование организации заказчика"
+               required #nameOrganizationCustomer="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="responsibleForWork">Отвественный за проведение работ</label>
+        <input type="text" [(ngModel)]="unit.responsibleForWork"
+               class="form-control"
+               id="responsibleForWork"
+               name="responsibleForWork"
+               placeholder="Отвественный за проведение работ"
+               required #responsibleForWork="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="contactPhoneNumber">Контактный телефон</label>
+        <input type="text" [(ngModel)]="unit.contactPhoneNumber"
+               class="form-control"
+               id="contactPhoneNumber"
+               name="contactPhoneNumber"
+               placeholder="Контактный телефон"
+               required #contactPhoneNumber="ngModel">
+      </div>
+      <div class="form-group">
+        <input type="hidden" [(ngModel)]="unit.type" value=true>
+      </div>
+      <div class="btn-group">
+      <button type="submit" [disabled]="!unitForm.form.valid"
+              class="btn btn-info">Сохранить</button>
+      <button type="submit" (click)="backClicked()" class="btn btn-secondary">Отмена</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

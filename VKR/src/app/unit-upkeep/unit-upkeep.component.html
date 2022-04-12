@@ -1,0 +1,66 @@
+<div class="flex-column">
+  <h1>Затраты на содержание</h1>
+  <div class="btn-group">
+  <button type="button" class="btn btn-default" (click)="addUpkeep()">Добавить</button>
+  <button type="button" class="btn btn-info" (click)="fireEvent()"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z"/>
+    <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z"/>
+    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z"/>
+  </svg></button>
+  </div>
+  <div class="productionClass">
+    <table class="table table-striped" #table>
+      <thead>
+      <tr>
+        <td>Наименование</td>
+        <td>Цена</td>
+        <td>Описание</td>
+        <td></td>
+        <td></td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let unitUpkeep of this.unitUpkeeps">
+        <ng-template [ngTemplateOutlet]="loadTemplate(unitUpkeep)"
+                     [ngTemplateOutletContext]="{ $implicit: unitUpkeep}">
+        </ng-template>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>{{statusMessage}}</div>
+</div>
+
+<!--шаблон для чтения-->
+<ng-template #readOnlyTemplate let-unitUpkeep>
+  <td>{{unitUpkeep.name}}</td>
+  <td>{{unitUpkeep.price}}</td>
+  <td>{{unitUpkeep.note}}</td>
+  <td>
+    <input type="button" value="Изменить" class="btn btn-default" (click)="editUpkeep(unitUpkeep)">
+  </td>
+  <td>
+    <input type="button" value="Удалить" (click)="deleteUpkeep(unitUpkeep)" class="btn btn-danger">
+  </td>
+</ng-template>
+
+<!--readonly disabled-->
+
+<!--шаблон для редактирования-->
+<ng-template #editTemplate>
+  <td>
+    <input type="text" [(ngModel)]="this.editedUnitUpkeep.name"  class="form-control">
+  </td>
+  <td>
+    <input type="number" name="quality" [(ngModel)]="this.editedUnitUpkeep.price" min="0" class="form-control">
+  </td>
+  <td>
+    <input type="text" name="quality" [(ngModel)]="this.editedUnitUpkeep.note" min="0" class="form-control">
+  </td>
+  <td>
+    <input type="button" value="Сохранить" (click)="saveUpkeep()" class="btn btn-success">
+  </td>
+  <td>
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning">
+  </td>
+</ng-template>

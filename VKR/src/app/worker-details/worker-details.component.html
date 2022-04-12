@@ -1,0 +1,79 @@
+<div class="container">
+<h1>Перечень производимых работ</h1>
+<div class="btn-group">
+<button type="submit" (click)="backClicked()" class="btn btn-secondary">Отмена</button>
+<input type="button" value="Добавить" class="btn btn-default" (click)="addUser()">
+</div>
+<div class="productionClass">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <td>Наименование</td>
+      <td>Единицы измерения</td>
+      <td>Цена за единицу</td>
+      <td>Тип работы</td>
+      <td></td>
+      <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let workerDetail of this.workerDetails">
+      <ng-template [ngTemplateOutlet]="loadTemplate(workerDetail)"
+                   [ngTemplateOutletContext]="{ $implicit: workerDetail}">
+      </ng-template>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div>{{statusMessage}}</div>
+
+<!--шаблон для чтения-->
+<ng-template #readOnlyTemplate let-workerDetail>
+  <td>{{workerDetail.namePosition}}</td>
+  <td>{{workerDetail.measure}}</td>
+  <td>{{workerDetail.priceOne}}</td>
+  <td>{{workerDetail.typeWork}}</td>
+  <td>
+    <input type="button" value="Изменить" class="btn btn-default" (click)="editUser(workerDetail)" >
+  </td>
+  <td>
+    <input type="button" value="Удалить" (click)="deleteUser(workerDetail)" class="btn btn-danger">
+  </td>
+</ng-template>
+
+<!--readonly disabled-->
+
+<!--шаблон для редактирования-->
+<ng-template #editTemplate>
+  <td>
+    <input type="text" [(ngModel)]="this.editedWorkerDetails.namePosition"  class="form-control">
+  </td>
+  <td>
+    <select [(ngModel)]="this.editedWorkerDetails.measure"  class="form-control">
+      <option selected>шт</option>
+      <option value="м2">м2</option>
+      <option value="м3">м3</option>
+      <option value="м">м</option>
+      <option value="кг">кг</option>
+    </select>
+  </td>
+  <td>
+    <input type="number" [(ngModel)]="this.editedWorkerDetails.priceOne" min="0"class="form-control">
+  </td>
+  <td>
+    <select [(ngModel)]="this.editedWorkerDetails.typeWork"  class="form-control">
+      <option selected>Тип1</option>
+      <option value="Тип2">Тип2</option>
+      <option value="Тип3">Тип3</option>
+      <option value="Тип4">Тип4</option>
+      <option value="Тип5">Тип5</option>
+    </select>
+  </td>
+  <td>
+    <input type="button" value="Сохранить" (click)="saveUser()" class="btn btn-success">
+  </td>
+  <td>
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning">
+  </td>
+</ng-template>
+</div>

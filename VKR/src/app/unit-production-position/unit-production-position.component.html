@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<div class="flex-column">
+<h1>Перечень производимых работ</h1>
+ <div class="btn-group">
+<button type="submit" (click)="backClicked()" class="btn btn-secondary">Отмена</button>
+<input type="button" value="Добавить" class="btn btn-default" (click)="addProductionPosition()">
+<button type="button" class="btn btn-info" (click)="fireEvent()"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z"/>
+  <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z"/>
+  <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 1z"/>
+</svg></button>
+ </div>
+  <div>{{statusMessage}}</div>
+  <mat-tab-group>
+    <mat-tab  label = "Список поставщиков">
+      <div class="productionClass">
+        <table class="table table-striped" #table>
+          <thead>
+          <tr>
+            <td>Наименование</td>
+            <td>Единицы измерения</td>
+            <td>Колличество</td>
+            <td>Цена за единицу</td>
+            <td>Итого</td>
+            <td>Выполняет</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let unitProductionPosition of this.unitProductionPositions">
+            <tr *ngIf="unitProductionPosition.status">
+                <ng-template [ngTemplateOutlet]="loadTemplate(unitProductionPosition)"
+                             [ngTemplateOutletContext]="{ $implicit: unitProductionPosition}">
+                </ng-template>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </mat-tab>
+        <mat-tab  label = "Список поставщиков">
+          <div class="productionClass">
+            <table class="table table-striped" #table>
+              <thead>
+              <tr>
+                <td>Наименование</td>
+                <td>Единицы измерения</td>
+                <td>Колличество</td>
+                <td>Цена за единицу</td>
+                <td>Итого</td>
+                <td>Выполняет</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              </thead>
+              <tbody>
+              <ng-container *ngFor="let unitProductionPosition of this.unitProductionPositions">
+                <tr *ngIf="!unitProductionPosition.status">
+                    <ng-template [ngTemplateOutlet]="loadTemplate(unitProductionPosition)"
+                                 [ngTemplateOutletContext]="{ $implicit: unitProductionPosition}">
+                    </ng-template>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<!--шаблон для чтения-->
+<ng-template #readOnlyTemplate let-unitProductionPosition>
+  <td>{{unitProductionPosition.namePosition}}</td>
+  <td>{{unitProductionPosition.measure}}</td>
+  <td>{{unitProductionPosition.quantity}}</td>
+  <td>{{unitProductionPosition.priceOne}}</td>
+  <td>{{unitProductionPosition.price}}</td>
+  <td>{{unitProductionPosition.worker.name}}</td>
+  <td>
+    <input type="button" value="Изменить" class="btn btn-default" (click)="editProductionPosition(unitProductionPosition)">
+  </td>
+  <td>
+    <input type="button" value="Удалить" (click)="deleteProductionPosition(unitProductionPosition)" class="btn btn-danger">
+  </td>
+  <td *ngIf="unitProductionPosition.status">
+    <button type="button" value="Изменить статус" (click)="updateStatus(unitProductionPosition)" class="btn btn-success"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+    </svg></button>
+  </td>
+  <td *ngIf="!unitProductionPosition.status">
+    <button type="button" value="Изменить статус" (click)="updateStatus(unitProductionPosition)" class="btn btn-dark"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-counterclockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M12.83 6.706a5 5 0 0 0-7.103-3.16.5.5 0 1 1-.454-.892A6 6 0 1 1 2.545 5.5a.5.5 0 1 1 .91.417 5 5 0 1 0 9.375.789z"/>
+      <path fill-rule="evenodd" d="M7.854.146a.5.5 0 0 0-.708 0l-2.5 2.5a.5.5 0 0 0 0 .708l2.5 2.5a.5.5 0 1 0 .708-.708L5.707 3 7.854.854a.5.5 0 0 0 0-.708z"/>
+    </svg></button>
+  </td>
+</ng-template>
+
+<!--readonly disabled-->
+
+<!--шаблон для редактирования-->
+<ng-template #editTemplate>
+  <td>
+    <input type="text" [(ngModel)]="this.editedProductionPosition.namePosition"  class="form-control">
+  </td>
+  <td>
+    <select *ngIf="!flagType"  [(ngModel)]="this.editedProductionPosition.measure"  class="form-control">
+      <option selected>шт</option>
+      <option value="м2">м2</option>
+      <option value="м3">м3</option>
+      <option value="м">м</option>
+      <option value="кг">кг</option>
+    </select>
+    <input *ngIf="flagType" type="text" [(ngModel)]="this.workerDetail.measure" class="form-control" readonly>
+  </td>
+  <td>
+    <input type="number" name="quality" [(ngModel)]="this.editedProductionPosition.quantity" min="0" class="form-control">
+  </td>
+  <td>
+    <input *ngIf="!flagType" type="number" [(ngModel)]="this.editedProductionPosition.priceOne" min="0"  class="form-control">
+    <input *ngIf="flagType" type="number" [(ngModel)]="this.workerDetail.priceOne" class="form-control" readonly>
+  </td>
+  <td>
+    <input *ngIf="!flagType" type="number" [(ngModel)]="this.editedProductionPosition.quantity*this.editedProductionPosition.priceOne"
+           class="form-control">
+    <input *ngIf="flagType" type="number" [(ngModel)]="this.editedProductionPosition.quantity*this.editedProductionPosition.priceOne"
+           class="form-control" readonly>
+  </td>
+  <td>
+    <select  [(ngModel)]="this.workerId"  (change)="openDialog(this.workerId)" class="form-control" >
+      <option *ngFor="let worker of this.works" value="{{worker.id}}">{{worker.name}}</option>
+    </select>
+  </td>
+  <td>
+    <input type="button" value="Сохранить" (click)="saveProductionPosition()" class="btn btn-success">
+  </td>
+  <td>
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning">
+  </td>
+</ng-template>

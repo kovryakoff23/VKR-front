@@ -1,0 +1,119 @@
+<div class="container">
+  <h1>Уведомления</h1>
+  <hr>
+  <mat-tab-group>
+    <mat-tab  label = "Все">
+      <div class="productionClass">
+        <div *ngFor="let notification of notifications">
+          <div [ngSwitch]="notification.type">
+            <div *ngSwitchCase="1">
+              <div class="alert alert-primary" role="alert">
+                <div class="row">
+                  <div class="col-2">
+                    <div>{{notification.dateCreate | date: 'dd/MM/yy'}}</div>
+                  </div>
+                  <div>{{notification.message}}</div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="2">
+              <div class="alert alert-success" role="alert">
+                <div class="row">
+                  <div class="col-2">
+                    <div>{{notification.dateCreate | date: 'dd/MM/yy'}}</div>
+                  </div>
+                  <div>{{notification.message}}</div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="3">
+              <div class="alert alert-warning" role="alert">
+                <div class="row">
+                  <div class="col-2">
+                    <div>{{notification.dateCreate | date: 'dd/MM/yy'}}</div>
+                  </div>
+                  <div>{{notification.message}}</div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="4">
+              <div class="alert alert-danger" role="alert">
+                <div class="row">
+                  <div class="col-2">
+                    <div>{{notification.dateCreate | date: 'dd/MM/yy'}}</div>
+                  </div>
+                  <div>{{notification.message}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab  label = "Объекты">
+      <div class="productionClass">
+      <div *ngFor="let notification of notifications">
+        <div *ngIf="notification.type==1">
+          <div class="alert alert-primary" role="alert">
+            <div class="row">
+              <div class="col-2">
+                <div>{{notification.dateCreate | date: 'dd/MM/yy'}}</div>
+              </div>
+              <div>{{notification.message}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </mat-tab>
+    <mat-tab  label = "Работы">
+      <div class="productionClass">
+      <div *ngFor="let notification of notifications">
+        <div  *ngIf="notification.type==2">
+          <div class="alert alert-success" role="alert">
+            <div class="row">
+              <div class="col-2">
+                <div>{{notification.dateCreate | date: 'dd/MM/yy'}}</div>
+              </div>
+              <div>{{notification.message}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </mat-tab>
+    <mat-tab  label = "Поставки">
+      <div class="productionClass">
+      <div *ngFor="let notification of notifications">
+        <div *ngIf="notification.type==3">
+          <div class="alert alert-warning" role="alert">
+            <div class="row">
+              <div class="col-2">
+                <div>{{notification.dateCreate | date: 'dd/MM/yy'}}</div>
+              </div>
+              <div>{{notification.message}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </mat-tab>
+    <mat-tab  label = "Выплаты">
+      <div class="productionClass">
+      <div *ngFor="let notification of notifications">
+        <div  *ngIf="notification.type==4">
+          <div class="alert alert-danger" role="alert">
+            <div class="row">
+              <div class="col-2">
+                <div>{{notification.dateCreate | date: 'dd/MM/yy'}}</div>
+              </div>
+              <div>{{notification.message}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

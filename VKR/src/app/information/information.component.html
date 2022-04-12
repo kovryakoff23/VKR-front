@@ -1,0 +1,153 @@
+<div class="container" style="height: 100vh">
+  <div class="container-flied px-0"  >
+  <mat-tab-group>
+    <mat-tab  label = "Информация" >
+  <div class="informationClass" style="overflow-x: hidden;">
+    <div class="row">
+      <div class="col">
+        <h5>Название</h5>
+      </div>
+      <div class="col">
+        <p>{{ information.nameOrganization}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>Полное название</h5>
+      </div>
+      <div class="col">
+        <p>{{ information.fullNameOrganization}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>Контактный телефон</h5>
+      </div>
+      <div class="col">
+        <p>{{ information.phoneNumber}}</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col">
+        <h5>Почтовый индекс</h5>
+      </div>
+      <div class="col">
+        <p>{{ information.postcode}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>Регион</h5>
+      </div>
+      <div class="col">
+        <p>{{ information.subject}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>Город</h5>
+      </div>
+      <div class="col">
+        <p>{{ information.city}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>Улица</h5>
+      </div>
+      <div class="col">
+        <p>{{information.street}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>Дом</h5>
+      </div>
+      <div class="col">
+        <p>{{ information.building}}</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col">
+        <h5>КПП</h5>
+      </div>
+      <div class="col">
+        <p>{{ information.KPP}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>ИНН</h5>
+      </div>
+      <div class="col">
+        <p>{{information.INN}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>Регистрационный номер</h5>
+      </div>
+      <div class="col">
+        <p>{{information.RegistrationNumber}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>Дата регистрации</h5>
+      </div>
+      <div class="col">
+        <p>{{ information.dateRegistration | date: 'dd/MM/yy'}}</p>
+      </div>
+    </div>
+  </div>
+    </mat-tab>
+    <mat-tab  label = "Нормативная документация" >
+      <div class="card mt-3">
+        <div class="card-header">Список документов</div>
+        <ul
+          class="list-group list-group-flush"
+          *ngFor="let file of fileInfos | async"
+        >
+          <li class="list-group-item">
+            <a [href]="file.url">{{ file.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </mat-tab>
+<!--    <mat-tab  label = "Доходы и рассходы">-->
+<!--      <div>-->
+<!--      <div class="row" style="overflow-x: hidden;">-->
+<!--        <div class="col"><h4>Заработнаяя плата</h4></div>-->
+<!--        <div class="col text-left"><p>{{infoReport.sumSalary}}</p></div>-->
+<!--      </div>-->
+<!--      <div class="row">-->
+<!--        <div class="col"><h4>Оплата поставок</h4></div>-->
+<!--        <div class="col text-left"><p>{{infoReport.sumPayment}}</p></div>-->
+<!--      </div>-->
+<!--      <div class="row">-->
+<!--        <div class="col"><h3>Итого</h3></div>-->
+<!--        <div class="col text-left"><p>{{infoReport.sumSalary+infoReport.sumPayment}}</p></div>-->
+<!--      </div>-->
+<!--      <div class="row">-->
+<!--        <div class="col"><h4>Колличество объектов</h4></div>-->
+<!--        <div class="col text-left"><p>{{infoReport.countUnit}}</p></div>-->
+<!--      </div>-->
+<!--      <div class="row">-->
+<!--        <div class="col"><h4>Колличество активных объектов</h4></div>-->
+<!--        <div class="col text-left"><p>{{infoReport.countUnitActive}}</p></div>-->
+<!--      </div>-->
+<!--      <div class="row">-->
+<!--        <div class="col"><h4>Колличество рабочих</h4></div>-->
+<!--        <div class="col text-left"><p>{{infoReport.quantityWorker}}</p></div>-->
+<!--      </div>-->
+<!--      <div class="row">-->
+<!--        <div class="col"><h4>Колличество поставщиков</h4></div>-->
+<!--        <div class="col text-left"><p>{{infoReport.quantitySuppliers}}</p></div>-->
+<!--      </div>-->
+<!--      </div>-->
+<!--    </mat-tab>-->
+  </mat-tab-group>
+  </div>
+</div>
